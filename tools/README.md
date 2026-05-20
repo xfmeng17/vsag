@@ -6,6 +6,7 @@ VSAG provides useful toolkits.
 - [analyze_index](#analyze_index)
 - [check_compatibility](#check_compatibility)
 - [eval](#eval)
+- [pyramid_level_memory](#pyramid_level_memory)
 
 
 ## analyze_index
@@ -21,4 +22,10 @@ See [check_compatibility/README.md](./check_compatibility/README.md) for more de
 ## eval
 Evaluate the performance of VSAG on various datasets.
 See [eval/README.md](./eval/README.md) for more details.
+
+
+## pyramid_level_memory
+Benchmark how the Pyramid index `no_build_levels` parameter trades off
+memory footprint for intermediate-layer search capability.
+See [pyramid_level_memory/README.md](./pyramid_level_memory/README.md) for more details.
 

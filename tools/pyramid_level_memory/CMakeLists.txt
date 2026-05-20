@@ -14,7 +14,5 @@
 # limitations under the License.
 
 
-add_subdirectory (eval)
-add_subdirectory (check_compatibility)
-add_subdirectory (analyze_index)
-add_subdirectory (pyramid_level_memory)
+add_executable (pyramid_level_memory pyramid_level_memory.cpp)
+target_link_libraries (pyramid_level_memory PRIVATE vsag)
