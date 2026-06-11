@@ -14,7 +14,14 @@
 # limitations under the License.
 
 
-add_subdirectory (eval)
-add_subdirectory (check_compatibility)
-add_subdirectory (analyze_index)
-add_subdirectory (gen_mv_hdf5)
+add_executable (gen_mv_hdf5 gen_mv_hdf5.cpp)
+target_include_directories (gen_mv_hdf5 PRIVATE ${PROJECT_SOURCE_DIR}/src)
+if (TARGET vsag_hdf5_headers)
+    target_link_libraries (gen_mv_hdf5 PRIVATE vsag_hdf5_headers)
+endif ()
+target_link_libraries (gen_mv_hdf5 PRIVATE
+    simd
+    ${HDF5_CPP_STATIC_LIBRARY}
+    ${HDF5_C_STATIC_LIBRARY}
+    z dl)
+add_dependencies (gen_mv_hdf5 hdf5)
