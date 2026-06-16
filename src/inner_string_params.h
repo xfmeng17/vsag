@@ -161,8 +161,6 @@ const char* const RABITQ_SPLIT_DATA_CELL = "rabitq_split_data_cell";
 const char* const SPARSE_VECTOR_DATA_CELL = "sparse_vector_data_cell";
 const char* const MULTI_VECTOR_DATA_CELL = "multi_vector_data_cell";
 
-const char* const MULTI_VECTOR_CODES = "multi_vector";
-
 // for pyramid index
 const char* const NO_BUILD_LEVELS = "no_build_levels";
 const char* const INDEX_MIN_SIZE = "index_min_size";
@@ -183,6 +181,7 @@ const char* const CODES_TYPE_KEY = "codes_type";
 const char* const FLATTEN_CODES = "flatten";
 const char* const RABITQ_SPLIT_CODES = "rabitq_split";
 const char* const SPARSE_CODES = "sparse";
+const char* const MULTI_VECTOR_CODES = "multi_vector";
 
 const char* const IVF_SEARCH_PARAM_SCAN_BUCKETS_COUNT = "scan_buckets_count";
 const char* const SEARCH_PARAM_FACTOR = "factor";
