@@ -66,7 +66,7 @@ auto result = index->KnnSearch(
 | 参数 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
 | `dim` | int | —（必填） | 单条稀疏向量允许的最大非零项数量，**不是** 词表大小 |
-| `term_id_limit` | int | `1000000` | 词项 ID 的上界（应 ≥ 最大词项 ID + 1） |
+| `term_id_limit` | int | `1000000` | 词项 ID 的上界（应 ≥ 最大词项 ID + 1，最高 50 000 000） |
 | `window_size` | int | `50000` | 每个窗口容纳的文档数（取值范围 10 000 – 60 000） |
 | `doc_prune_ratio` | float | `0.0` | 构建阶段按文档丢弃权重最低词项的比例（0.0 – 0.9） |
 | `use_quantization` | bool | `false` | 是否量化词项权重以降低内存；开启后使用 8-bit 标量量化（SQ8） |
@@ -128,6 +128,15 @@ SINDI **不支持** 稠密向量，只支持内积相似度。范围检索与基
      分词器、外部词表 ID，或存在大量空白区间的词表，建议设置 `remap_term_ids: true`。
      这样可以避免管理大量空倒排列表带来的内存浪费，也能降低触达 `term_id_limit`
      上限的风险。
+
+## 标记删除
+
+SINDI 支持 `RemoveMode::MARK_REMOVE`。调用 `Remove(ids)`（默认模式）会为给定的 id
+打上删除标记：它们不再出现在检索结果中，`GetNumElements()` 相应减少，
+`GetNumberRemoved()` 返回累计删除数量。删除不存在或已删除的 id 不会有任何效果。
+`RemoveMode::FORCE_REMOVE` 不支持，调用会返回错误。
+
+被标记删除的文档在索引重建前仍占用内存，空间不会被物理回收。
 
 ## 相关文档
 

@@ -70,7 +70,7 @@ and `metric_type` **must** be `"ip"`.
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `dim` | int | — (required) | Maximum number of non-zero elements per sparse vector. *Not* the vocabulary size. |
-| `term_id_limit` | int | `1000000` | Upper bound on term id values (≥ max term id + 1). |
+| `term_id_limit` | int | `1000000` | Upper bound on term id values (≥ max term id + 1, up to 50 000 000). |
 | `window_size` | int | `50000` | Documents per window (range: 10 000 – 60 000). |
 | `doc_prune_ratio` | float | `0.0` | Fraction of lowest-weight terms dropped per doc at build time (0.0 – 0.9). |
 | `use_quantization` | bool | `false` | Quantize stored term values to cut memory; when enabled, uses 8-bit scalar quantization (SQ8). |
@@ -140,6 +140,17 @@ Range search and id-based filtering are supported; see the example for usage.
      range, such as hash-based tokenizers, external vocabulary IDs, or vocabularies
      with large gaps, enable `remap_term_ids: true`. This avoids managing many
      empty posting lists and helps stay below the `term_id_limit` ceiling.
+
+## Mark remove
+
+SINDI supports `RemoveMode::MARK_REMOVE`. Calling `Remove(ids)` (the default mode)
+tombstones the given ids so they no longer appear in search results;
+`GetNumElements()` drops accordingly and `GetNumberRemoved()` reports the running
+total. Removing an id that is absent or already removed is a no-op.
+`RemoveMode::FORCE_REMOVE` is not supported and returns an error.
+
+Mark-removed documents still occupy memory until the index is rebuilt; the space
+is not physically reclaimed.
 
 ## See also
 
