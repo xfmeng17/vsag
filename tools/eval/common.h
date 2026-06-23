@@ -25,14 +25,9 @@ namespace vsag::eval {
 
 using JsonType = nlohmann::json;
 
-// vector_type
 constexpr static const char* DENSE_VECTORS = "dense_vectors";
 constexpr static const char* SPARSE_VECTORS = "sparse_vectors";
 constexpr static const char* MULTI_VECTORS = "multi_vectors";
-
-// reorder_type
-constexpr static const char* REORDER_NONE = "none";
-constexpr static const char* REORDER_MULTI_VECTOR = "multi_vector";
 
 template <class T = std::string>
 T
