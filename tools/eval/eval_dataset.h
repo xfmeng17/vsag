@@ -332,5 +332,6 @@ protected:
     int64_t multi_vector_dim_{0};
 
     std::string vector_type_ = DENSE_VECTORS;
+    std::string reorder_type_ = REORDER_NONE;
 };
 }  // namespace vsag::eval
